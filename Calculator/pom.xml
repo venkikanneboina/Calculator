@@ -1,110 +1,251 @@
-<!--
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    Copyright (C) 2014 Apigee Corporation
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>apigee</groupId>
+	<artifactId>Calculator</artifactId>
+	<version>1.0.0</version>
+	<name>Calculator</name>
+	<packaging>pom</packaging>
 
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Maven Plugin Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+	<repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
-            http://www.apache.org/licenses/LICENSE-2.0
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<org.slf4j.simpleLogger.defaultLogLevel>info</org.slf4j.simpleLogger.defaultLogLevel>
+		<project.root.dir>D:/G/apiproxy</project.root.dir>
+		<target.root.dir>D:/G/target</target.root.dir>
+		<deployment.suffix>venkikanneboina@gmail.com</deployment.suffix>
+		<commit></commit>
+		<branch>a local</branch>
+	</properties>
 
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+	<!-- This is where you add the environment specific properties under various profile names -->
+	<!-- For apigee.options, refer to "Advanced Configuration Options" under https://github.com/apigee/apigee-deploy-maven-plugin#pom-xml-sample -->
+	<profiles>
+		<profile>
+			<id>test</id>
+			<properties>
+				<apigee.profile>test</apigee.profile>
+				<apigee.env>test</apigee.env>
+				<apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
+				<apigee.apiversion>v1</apigee.apiversion>
+				<apigee.org>venkikanneboina-eval</apigee.org>
+				<apigee.username>venkikanneboina@gmail.com</apigee.username>
+				<apigee.password>Havish@2021</apigee.password>				
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<apigee.profile>prod</apigee.profile>
+				<apigee.env>prod</apigee.env>
+				<apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
+				<apigee.apiversion>v1</apigee.apiversion>
+				<apigee.org>venkikanneboina-eval</apigee.org>
+				<apigee.username>venkikanneboina@gmail.com</apigee.username>
+				<apigee.password>Havish@2021</apigee.password>
+			</properties>
+		</profile>
+	</profiles>
 
--->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>parent-pom</artifactId>
-        <groupId>apigee</groupId>
-        <version>1.0</version>
-        <relativePath>../shared-pom.xml</relativePath>
-    </parent>
+	<build>
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>apigee</groupId>
-    <artifactId>Calculator</artifactId>
-    <version>1.0</version>
-    <name>Calculator</name>
-    <packaging>pom</packaging>
-<!-- optional tests
-    <profiles>
-        <profile>
-            <id>test</id>
-            <build>
-              <plugins>
-                <plugin>
-                    <groupId>com.lazerycode.jmeter</groupId>
-                    <artifactId>jmeter-maven-plugin</artifactId>
-                    <version>1.8.1</version>
-                    <executions>
-                        <execution>
-                            <id>jmeter-tests</id>
-                            <phase>install</phase>
-                            <goals>
-                                <goal>jmeter</goal>
-                            </goals>
-                            <configuration>
-                                <skipTests>${skipTests}</skipTests> 
-                                <ignoreResultFailures>true</ignoreResultFailures>
-                                <suppressJMeterOutput>false</suppressJMeterOutput>
-                                    <propertiesUser> 
-                                        <testData>weather_test.csv</testData>
-                                        <threadNum>5</threadNum>
-                                        <rampUpPeriodSecs>5</rampUpPeriodSecs>
-                                        <loopCount>2</loopCount>
-                                    </propertiesUser> 
-                            </configuration>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <testFilesDirectory>tests</testFilesDirectory>
-                        <testResultsTimestamp>false</testResultsTimestamp>
-                    </configuration>                    
-                    </plugin>
-                </plugins>
-            </build>            
-        </profile>        
-        <profile>
-            <id>prod</id>
-            <build>
-              <plugins>
-                <plugin>
-                    <groupId>com.lazerycode.jmeter</groupId>
-                    <artifactId>jmeter-maven-plugin</artifactId>
-                    <version>1.8.1</version>
-                    <executions>
-                        <execution>
-                            <id>jmeter-tests</id>
-                            <phase>install</phase>
-                            <goals>
-                                <goal>jmeter</goal>
-                            </goals>
-                            <configuration>
-                                <skipTests>${skipTests}</skipTests>
-                                <ignoreResultFailures>true</ignoreResultFailures>
-                                <suppressJMeterOutput>false</suppressJMeterOutput>
-                                    <propertiesUser> 
-                                        <testData>weather_prod.csv</testData>
-                                        <threadNum>5</threadNum>
-                                        <rampUpPeriodSecs>5</rampUpPeriodSecs>
-                                        <loopCount>2</loopCount>
-                                    </propertiesUser> 
-                            </configuration>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <testFilesDirectory>tests</testFilesDirectory>
-                        <testResultsTimestamp>false</testResultsTimestamp>
-                    </configuration>                    
-                    </plugin>
-                </plugins>
-            </build>            
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>io.apigee.build-tools.enterprise4g</groupId>
+					<artifactId>apigee-edge-maven-plugin</artifactId>
+					<version>1.1.7</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 
-        </profile>
-    </profiles>
--->    
+		<plugins>
+
+			<!-- run jslint -->
+		
+			<!-- copy the full apiproxy folder to target folder -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<overwrite>true</overwrite>
+							<resources>
+								<resource>
+									<!--source -->
+									<directory>D:/G/apiproxy</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>apiproxy/**</include>
+										<include>test/integration/**</include>
+									</includes>
+								</resource>
+							</resources>
+							<!--target -->
+							<outputDirectory>D:/G/target</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.2</version>
+				<executions>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<basedir>D:/G/target</basedir>
+					<includes>
+						<include>apiproxy/proxies/default.xml</include>
+						<include>apiproxy/proxies/loggly.xml</include>
+						<include>test/integration/test-config.json</include>
+						<include>apiproxy/Calculator.xml</include>
+					</includes>
+					<replacements>
+						<replacement>
+							<token>/Calculator/v1</token>
+							<value>/Calculator/v1</value>
+						</replacement>
+						
+					</replacements>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>io.apigee.build-tools.enterprise4g</groupId>
+				<artifactId>apigee-edge-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>configure-bundle-step</id>
+						<phase>package</phase>
+						<goals>
+							<goal>configure</goal>
+						</goals>
+					</execution>
+					<!--deploy bundle -->
+					<execution>
+						<id>deploy-bundle-step</id>
+						<phase>install</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.3.2</version>
+				<executions>
+					<!-- npm install -->
+					<execution>
+						<id>npm-install</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>npm</executable>
+							<commandlineArgs>
+								install
+							</commandlineArgs>
+						</configuration>
+					</execution>
+					<!-- run unit tests -->
+					<execution>
+						<id>unit</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>./node_modules/mocha/bin/mocha</executable>
+							<commandlineArgs>
+								test/unit
+							</commandlineArgs>
+						</configuration>
+					</execution>
+					<!-- run integration tests -->
+					<execution>
+						<id>integration</id>
+						<phase>install</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>./node_modules/cucumber/bin/cucumber.js</executable>
+							<commandlineArgs>
+								target/test/integration/features --tags ${api.testtag}
+							</commandlineArgs>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- cleaning dirs -->
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+
+				<executions>
+					<execution>
+						<id>auto-clean-init</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>auto-clean-install</id>
+						<phase>install</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

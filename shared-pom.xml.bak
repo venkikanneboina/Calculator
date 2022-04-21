@@ -76,7 +76,22 @@
 	</build>
 <!-- This is where you add the environment specific properties under various profile names -->		
  <profiles>
-        
+        <profile>
+            <id>test</id>
+            <properties>
+                <org>testmyapi</org>  <!-- default org, replace with dafault org to avoid passing parameter e.g. -Dorg testmyapi -->
+                <options>validate</options>  <!-- default org, replace with dafault org to avoid passing parameter e.g. -Dorg testmyapi -->
+                <apigee.profile>test</apigee.profile>
+                <apigee.env>test</apigee.env>
+                <apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
+                <apigee.apiversion>v1</apigee.apiversion>
+                <apigee.org>venkikanneboina-eval</apigee.org>
+                <apigee.username>venkikanneboina@gmail.com</apigee.username>
+                <apigee.password>Havish@2021</apigee.password>
+                                <!--apigee.override.delay>10</apigee.override.delay-->
+                <!--apigee.delay>1000</apigee.delay-->                                  
+            </properties>
+        </profile>        
         <profile>
             <id>prod</id>
             <properties>

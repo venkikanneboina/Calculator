@@ -174,54 +174,6 @@
 			</plugin>
 
 			
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.3.2</version>
-				<executions>
-					<!-- npm install -->
-					<execution>
-						<id>npm-install</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>npm</executable>
-							<commandlineArgs>
-								install
-							</commandlineArgs>
-						</configuration>
-					</execution>
-					<!-- run unit tests -->
-					<execution>
-						<id>unit</id>
-						<phase>validate</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>./node_modules/mocha/bin/mocha</executable>
-							<commandlineArgs>
-								test/unit
-							</commandlineArgs>
-						</configuration>
-					</execution>
-					<!-- run integration tests -->
-					<execution>
-						<id>integration</id>
-						<phase>install</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>./node_modules/cucumber/bin/cucumber.js</executable>
-							<commandlineArgs>
-								target/test/integration/features --tags ${api.testtag}
-							</commandlineArgs>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 
 			<!-- cleaning dirs -->
 			<plugin>

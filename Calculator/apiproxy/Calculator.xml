@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="1" name="Calculator">
+    <Basepaths>/calculator</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1650511567648</CreatedAt>
+    <CreatedBy>venkikanneboina@gmail.com</CreatedBy>
+    <Description></Description>
+    <DisplayName>Calculator</DisplayName>
+    <LastModifiedAt>1650511567648</LastModifiedAt>
+    <LastModifiedBy>venkikanneboina@gmail.com</LastModifiedBy>
+    <ManifestVersion>SHA-512:0492c9e946cf48600eaf7b27ea322e508304973f2ab12991ffe1a2358af9e5e711bc69c2302bc7eb60e222e7e9a6ce0fc9dd31e0cc7b842e80fc2bbf2aa4e93a:ap-northeast-1</ManifestVersion>
+    <Policies/>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources/>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

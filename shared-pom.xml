@@ -20,7 +20,7 @@
         </pluginRepository>
     </pluginRepositories>
 	<properties>
-            <main.basedir>D:/G/apiproxy</main.basedir>
+            <main.basedir>/home/vkanneboina/Jenkins/apiproxy</main.basedir>
     </properties>
     <!-- Since Maven 3.0.3, for two plugins bound to the same phase, the order 
          of execution is the same as the order in which you define them. -->
@@ -38,7 +38,7 @@
                         </goals>
                         <configuration>
                             <overwrite>true</overwrite>
-                            <outputDirectory>D:/G/target/apiproxy</outputDirectory>
+                            <outputDirectory>/home/vkanneboina/Jenkins/target</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>apiproxy</directory>

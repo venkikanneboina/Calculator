@@ -1,186 +1,202 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>apigee</groupId>
-    <artifactId>parent-pom</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0</version>
-    <pluginRepositories>
-        <pluginRepository>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>apigee</groupId>
+	<artifactId>Calculator</artifactId>
+	<version>1.0.0</version>
+	<name>Calculator</name>
+	<packaging>pom</packaging>
+
+	<!--<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Maven Plugin Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>-->
+	<!--<repositories>
+        <repository>
             <id>central</id>
-            <name>Maven Plugin Repository</name>
-            <url>http://repo1.maven.org/maven2</url>
+            <name>Central Repository</name>
+            <url>https://repo.maven.apache.org/maven2</url>
             <layout>default</layout>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-            <releases>
-                <updatePolicy>never</updatePolicy>
-            </releases>
-        </pluginRepository>
-    </pluginRepositories>
-	<properties>
-            <main.basedir>/home/vkanneboina/Jenkins/apiproxy</main.basedir>
-    </properties>
-    <!-- Since Maven 3.0.3, for two plugins bound to the same phase, the order 
-         of execution is the same as the order in which you define them. -->
-    <build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>2.3</version>
-                <executions>
-                    <execution>
-                        <id>copy-resources-step</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <overwrite>true</overwrite>
-                            <outputDirectory>/home/vkanneboina/Jenkins/target</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>apiproxy</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>io.apigee.build-tools.enterprise4g</groupId>
-                <artifactId>apigee-edge-maven-plugin</artifactId>
-                <version>1.1.7</version>
-                <executions>
-                    <execution>
-                        <id>configure-bundle-step</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>configure</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>deploy-bundle</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.apigee.edge.config</groupId>
-                <artifactId>apigee-config-maven-plugin</artifactId>
-                <version>1.1.7</version>
-                <executions>
-                    <execution>
-                        <id>create-config-cache</id>
-                        <phase>verify</phase>                        
-                        <goals>
-                            <goal>caches</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>create-config-targetserver</id>
-                        <phase>verify</phase>                        
-                        <goals>
-                            <goal>targetservers</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>create-config-kvm</id>
-                        <phase>install</phase>                        
-                        <goals>
-                            <goal>keyvaluemaps</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>create-config-resourcefiles</id>
-                        <phase>install</phase>                        
-                        <goals>
-                            <goal>resourcefiles</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>create-config-apiproduct</id>
-                        <phase>install</phase>                        
-                        <goals>
-                            <goal>apiproducts</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>create-config-developer</id>
-                        <phase>install</phase>                        
-                        <goals>
-                            <goal>developers</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>create-config-app</id>
-                        <phase>install</phase>                        
-                        <goals>
-                            <goal>apps</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>create-config-maskconfig</id>
-                        <phase>install</phase>                        
-                        <goals>
-                            <goal>maskconfigs</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>            
+        </repository>
+    </repositories>-->
 
-        </plugins>
-    </build>
-  <profiles>
-        <profile>
-            <id>test</id>
-            <properties>
-                <org>testmyapi</org>  <!-- default org, replace with dafault org to avoid passing parameter e.g. -Dorg testmyapi -->
-                <options>validate</options>  <!-- default org, replace with dafault org to avoid passing parameter e.g. -Dorg testmyapi -->
-                <apigee.profile>test</apigee.profile>
-                <apigee.env>test</apigee.env>
-                <apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
-                <apigee.apiversion>v1</apigee.apiversion>
-                <apigee.org>venkikanneboina-eval</apigee.org>
-                <apigee.username>venkikanneboina@gmail.com</apigee.username>
-                <apigee.password>Havish@2021</apigee.password>
-                                <!--apigee.override.delay>10</apigee.override.delay-->
-                <!--apigee.delay>1000</apigee.delay-->                                  
-            </properties>
-        </profile>        
-        <profile>
-            <id>prod</id>
-            <properties>
-                <org>testmyapi</org>  <!-- default org, replace with dafault org to avoid passing parameter e.g. -Dorg testmyapi -->
-                <options>validate</options>  <!-- default org, replace with dafault org to avoid passing parameter e.g. -Dorg testmyapi -->                
-                <apigee.profile>prod</apigee.profile>
-                <apigee.env>prod</apigee.env>
-                <apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
-                <apigee.apiversion>v1</apigee.apiversion>
-                <apigee.org>venkikanneboina-eval</apigee.org>
-                <apigee.username>venkikanneboina@gmail.com</apigee.username>
-                <apigee.password>Havish@2021</apigee.password>                <!--apigee.override.delay>10</apigee.override.delay-->
-                <!--apigee.delay>1000</apigee.delay-->                       
-            </properties>
-        </profile>
-    </profiles>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.8.2</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+	<!--<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<org.slf4j.simpleLogger.defaultLogLevel>info</org.slf4j.simpleLogger.defaultLogLevel>
+		<project.root.dir>D:/G/apiproxy</project.root.dir>
+		<target.root.dir>D:/G/target</target.root.dir>
+		<deployment.suffix>venkikanneboina@gmail.com</deployment.suffix>
+		<commit></commit>
+		<branch>a local</branch>
+	</properties>-->
+
+	<!-- This is where you add the environment specific properties under various profile names -->
+	<!-- For apigee.options, refer to "Advanced Configuration Options" under https://github.com/apigee/apigee-deploy-maven-plugin#pom-xml-sample -->
+	<profiles>
+		<profile>
+			<id>test</id>
+			<properties>
+				<apigee.profile>test</apigee.profile>
+				<apigee.env>test</apigee.env>
+				<apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
+				<apigee.apiversion>v1</apigee.apiversion>
+				<apigee.org>venkikanneboina-eval</apigee.org>
+				<apigee.username>venkikanneboina@gmail.com</apigee.username>
+				<apigee.password>Havish@2021</apigee.password>				
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<apigee.profile>prod</apigee.profile>
+				<apigee.env>prod</apigee.env>
+				<apigee.hosturl>https://api.enterprise.apigee.com</apigee.hosturl>
+				<apigee.apiversion>v1</apigee.apiversion>
+				<apigee.org>venkikanneboina-eval</apigee.org>
+				<apigee.username>venkikanneboina@gmail.com</apigee.username>
+				<apigee.password>Havish@2021</apigee.password>
+			</properties>
+		</profile>
+	</profiles>
+
+	<build>
+	<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>io.apigee.build-tools.enterprise4g</groupId>
+					<artifactId>apigee-edge-maven-plugin</artifactId>
+					<version>1.1.7</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+
+			<!-- run jslint -->
+		
+			<!-- copy the full apiproxy folder to target folder -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<overwrite>true</overwrite>
+							<resources>
+								<resource>
+								
+									<directory>/home/vkanneboina/Jenkins/apiproxy</directory>
+									<filtering>true</filtering>
+									<includes>
+										<include>apiproxy/**</include>
+										<include>test/integration/**</include>
+									</includes>
+								</resource>
+							</resources>
+							
+							<outputDirectory>/home/vkanneboina/Jenkins/target</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.2</version>
+				<executions>
+					<execution>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<basedir>/home/vkanneboina/Jenkins/target</basedir>
+					<includes>
+						<include>apiproxy/proxies/default.xml</include>
+						<include>apiproxy/proxies/loggly.xml</include>
+						<include>test/integration/test-config.json</include>
+						<include>apiproxy/Calculator.xml</include>
+					</includes>
+					<replacements>
+						<replacement>
+							<token>/Calculator/v1</token>
+							<value>/Calculator/v1</value>
+						</replacement>
+						
+					</replacements>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>io.apigee.build-tools.enterprise4g</groupId>
+				<artifactId>apigee-edge-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>configure-bundle-step</id>
+						<phase>package</phase>
+						<goals>
+							<goal>configure</goal>
+						</goals>
+					</execution>
+					<!--deploy bundle -->
+					<execution>
+						<id>deploy-bundle-step</id>
+						<phase>install</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			
+
+			<!-- cleaning dirs -->
+			<!--<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.5</version>
+
+				<executions>
+					<execution>
+						<id>auto-clean-init</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>auto-clean-install</id>
+						<phase>install</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>-->
+		</plugins>
+	</build>
+
 </project>
-
-
-
-
-
-
-
